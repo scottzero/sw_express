@@ -16,12 +16,7 @@ return coords;
 
 // pass the coords into a darksky function
 async function darksky(){
-  // var x = Promise.resolve(coordinates()); //resolver function
   var x = await coordinates();
-    // x.then(function(v){
-    // var latty = v.lat;
-    // var longyy = v.lng;
-    // console.log(latty);
     let response = await fetch(`https://api.darksky.net/forecast/a8575d384c0eee696e336415e7548404/${x.lat},${x.lng}`);
     let weather = await response.json();
     return console.log(weather);
