@@ -1,3 +1,4 @@
+var env = require('dotenv').config();
 const fetch = require('node-fetch');
 var express = require('express');
 const app = express();
@@ -6,7 +7,7 @@ var router= express.Router();
 // var router = express.Router();
 // this function will return our google api coordinates
 async function fetchAsync(city) {
-  let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=AIzaSyAlLNOLsxFHy8B6WJ7p0LoiNfMCDomBcJg`);
+  let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${process.env.GOOGLE_API_KEY}`);
   let posts = await response.json();
   return posts;
 }
@@ -21,7 +22,7 @@ return coords;
 // pass the coords into a darksky function
 async function darksky(city){
   var x = await coordinates(city);
-    let response = await fetch(`https://api.darksky.net/forecast/a8575d384c0eee696e336415e7548404/${x.lat},${x.lng}`);
+    let response = await fetch(`https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/${x.lat},${x.lng}`);
     let weather = await response.json();
     return weather;
 };
