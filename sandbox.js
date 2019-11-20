@@ -22,4 +22,4 @@ async function darksky(){
     return console.log(weather);
 };
 
-darksky();
+module.exports = darksky();
