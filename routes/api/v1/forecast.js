@@ -7,8 +7,6 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../../knexfile')[environment];
 const database = require('knex')(configuration);
 
-
-
 // var router = express.Router();
 // this function will return our google api coordinates
 async function fetchAsync(city) {
@@ -50,5 +48,9 @@ router.get("/", (request, response) => {
        response.status(500).json({ error });
      });
 });
-
-module.exports = router;
+// module.exports = router;
+// module.exports = fetchAsync;
+module.exports ={
+  router,
+  darksky
+}; 

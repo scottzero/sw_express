@@ -6,6 +6,8 @@ var router= express.Router();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../../knexfile')[environment];
 const database = require('knex')(configuration);
+const forecast = require('./forecast')
+
 
 async function getUser(key){
   let users = await database('users').where('api_key', key);
@@ -14,11 +16,8 @@ async function getUser(key){
 async function getFaves(key){
   let u_id = await getUser(key);
   let location = await database('favorites').where('user_id', u_id);
-  // let result = [];
-  var faves = location.map(x => x.location)
-  return console.log(faves);
-   // result.push(i.location);
-  // return console.log(result);
+  var faves = await location.map(x => x.location)
+  return console.log(await forecast.darksky(faves[0]));
 }
 
 router.get("/", (request, response) => {
