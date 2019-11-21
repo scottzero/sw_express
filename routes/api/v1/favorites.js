@@ -1,8 +1,8 @@
-var env = require('dotenv').config();
+const env = require('dotenv').config();
 const fetch = require('node-fetch');
-var express = require('express');
+const express = require('express');
 const app = express();
-var router= express.Router();
+const router= express.Router();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('../../../knexfile')[environment];
 const database = require('knex')(configuration);
@@ -17,10 +17,12 @@ async function getFaves(key){
   let u_id = await getUser(key);
   let location = await database('favorites').where('user_id', u_id);
   var faves = await location.map(x => x.location)
-  return console.log(await forecast.darksky(faves[0]));
+  return await forecast.darksky(faves[0]);
 }
 
 router.get("/", (request, response) => {
   getFaves(request.body.api_key)
+  .then(data => response.status(200).send(data)) //sends to render out data
+  .catch(reason => response.send(reason.message));
 });
 module.exports = router;
