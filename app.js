@@ -1,14 +1,13 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
-var indexRouter = require('./routes/index');
-var forecastRouter = require('./routes/api/v1/forecast'); //require forecast controller
-var favoritesRouter = require('./routes/api/v1/favorites'); //require forecast controller
-var app = express();
+const indexRouter = require('./routes/index');
+const forecastRouter = require('./routes/api/v1/forecast'); //require forecast controller
+const favoritesRouter = require('./routes/api/v1/favorites'); //require forecast controller
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
