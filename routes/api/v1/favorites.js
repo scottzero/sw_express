@@ -26,7 +26,7 @@ const forecast = require('./forecast')
 
   async function getFaves(key){
     let u_id = await getUser(key);
-    let location = await database('favorites').where('user_id', u_id);
+    let location = await database('favorites').where('user_id', u_id);//returns array of favorite locations
     var faves = await location.map(x => x.location)
     let x = await faveArr(faves);
     return x;
@@ -48,6 +48,15 @@ const forecast = require('./forecast')
 .catch(error => {
   response.status(500).json({ error });
   });
+});
+
+router.post('/', (request, response) => {
+  database('users').where('api_key', request.body.api_key)
+  .then(users=> {
+    database('favorites').insert({location: request.body.location, user_id: users[0].id},"id")
+    .then(favorite => response.status(201).send(`message: ${request.body.location} has been added to your favorites`))
+    .catch(error => response.status(500).send( error));
+    });
 });
 //Exports
 module.exports = router;
