@@ -33,9 +33,21 @@ const forecast = require('./forecast')
 };//end getFaves
 
   router.get("/", (request, response) => {
+  database('users').where('api_key', request.body.api_key)
+  .then(users=> {
+  if(users.length){
     getFaves(request.body.api_key)
     .then(data => response.status(200).send(data)) //sends to render out data
     .catch(reason => response.send(reason.message));
+  }else{
+    response.status(401).json({
+      error: 'could not find user with that api key'
+    });
+  }
+})
+.catch(error => {
+  response.status(500).json({ error });
   });
+});
 //Exports
 module.exports = router;
