@@ -1,3 +1,4 @@
+//Requirements
 const env = require('dotenv').config();
 const fetch = require('node-fetch');
 const express = require('express');
@@ -12,18 +13,18 @@ const database = require('knex')(configuration);
 async function fetchAsync(city) {
   let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${process.env.GOOGLE_API_KEY}`);
   let posts = await response.json();
-  return posts;
+  return posts; //change names
 }
 
 // function that returns the lat long coords
 async function coordinates(city){
-  var data = await fetchAsync(city)  //invoke the function
+  var data = await fetchAsync(city)
   var coords = data.results[0].geometry.location
   return coords;
 };
 
 // pass the coords into a darksky function
-async function darksky(city){
+async function darksky(city){//create for each method to handle list of locations
   var x = await coordinates(city);
     let response = await fetch(`https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/${x.lat},${x.lng}`);
     let weather = await response.json();
@@ -31,8 +32,8 @@ async function darksky(city){
 };
 
 router.get("/", (request, response) => {
-  // var user = database('users').select * from users where api_key='123';
-  database('users').where('api_key', request.body.api_key)
+  // y = database('users').where('api_key', request.body.api_key)
+    database('users').where('api_key', request.body.api_key)
      .then(users => {
        if (users.length) {
          darksky(request.query.location)

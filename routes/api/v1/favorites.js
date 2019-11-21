@@ -13,12 +13,24 @@ const forecast = require('./forecast')
     let users = await database('users').where('api_key', key);
     return (users[0].id);
   }
+
+  const faveArr = (f) => {
+    const promises = f.map(async (eachFave) => {
+      return {
+          name: eachFave,
+          myValue: await forecast.darksky(eachFave)
+      }
+  });
+  return Promise.all(promises);
+}
+
   async function getFaves(key){
     let u_id = await getUser(key);
     let location = await database('favorites').where('user_id', u_id);
     var faves = await location.map(x => x.location)
-    return await forecast.darksky(faves[0]);
-  }
+    let x = await faveArr(faves);
+    return x;
+};//end getFaves
 
   router.get("/", (request, response) => {
     getFaves(request.body.api_key)
