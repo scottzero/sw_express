@@ -17,6 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/',indexRouter);
-app.use('/api/v1/forecast',forecastRouter);//endpoint for forecasts
+app.use('/api/v1/forecast',forecastRouter.router);//endpoint for forecasts
 app.use('/api/v1/favorites',favoritesRouter);//endpoint for favorites
 module.exports = app;
