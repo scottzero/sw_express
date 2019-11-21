@@ -48,8 +48,7 @@ router.get("/", (request, response) => {
        response.status(500).json({ error });
      });
 });
-// module.exports = router;
-// module.exports = fetchAsync;
+//Exports
 module.exports ={
   router,
   darksky
