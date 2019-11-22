@@ -58,5 +58,14 @@ router.post('/', (request, response) => {
     .catch(error => response.status(500).send( error));
     });
 });
+
+router.delete('/', (request,response) =>{
+  database('users').where('api_key', request.body.api_key)
+  .then(users => {
+    database('favorites').where('user_id', `${users[0].id}`).del("location", request.body.location)
+    .then(res => response.status(204).send('status 204'))
+    .catch(error => response.status(500).send(error));
+  })
+})
 //Exports
 module.exports = router;
