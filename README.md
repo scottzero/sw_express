@@ -9,7 +9,7 @@ This is an API built with the Express Framework! A user will be able to pass an 
 ## Endpoints
 ### GET /api/v1/forecast?location=denver,co
 #### Example Response
-`
+```
 {
   "location": "Denver, C0",
   "currently": {
@@ -76,7 +76,7 @@ This is an API built with the Express Framework! A user will be able to pass an 
     ]
   }
 }
-`
+```
 
 ### POST /api/v1/favorites
 #### Example Response
