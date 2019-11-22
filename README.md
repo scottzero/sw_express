@@ -89,7 +89,7 @@ body:
 `
 ### GET /api/v1/favorites
 #### Example Response
-`
+```
 status: 200
 body:
 [
@@ -126,7 +126,7 @@ body:
     }
   }
 ]
-`
+```
 ### DELETE /api/v1/favorites
 #### Example Response
 `
