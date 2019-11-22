@@ -32,7 +32,6 @@ async function darksky(city){//create for each method to handle list of location
 };
 
 router.get("/", (request, response) => {
-  // y = database('users').where('api_key', request.body.api_key)
     database('users').where('api_key', request.body.api_key)
      .then(users => {
        if (users.length) {

@@ -7,7 +7,7 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const indexRouter = require('./routes/index');
 const forecastRouter = require('./routes/api/v1/forecast');
-const favoritesRouter = require('./routes/api/v1/favorites'); 
+const favoritesRouter = require('./routes/api/v1/favorites');
 const app = express();
 //Exress.uses
 app.use(logger('dev'));
