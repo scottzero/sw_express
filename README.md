@@ -1,5 +1,5 @@
 # Sweater Weather [In Express]
-#### [Refacotor in progress]
+#### [Refactor in progress]
 ###### Check me out here 
 https://polar-island-07844.herokuapp.com/
 
