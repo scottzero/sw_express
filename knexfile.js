@@ -23,7 +23,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: '',
+    connection: 'postgres://polar-island-07844',
     migrations: {
       directory: './db/migrations'
     },
